@@ -78,7 +78,7 @@ make waka-correlate   # join activity + quality snapshots → results/
 
 - [coding-agent-eval](../coding-agent-eval/) — agent evaluation harness
 - [cc-recursive-team-mode](../cc-recursive-team-mode/) — Claude Code recursive benchmark
-- [coding-agents-research](../coding-agents-research/) — research notes and landscape
+- [ai-agents-research](../ai-agents-research/) — research notes and landscape
 
 ## License
 
