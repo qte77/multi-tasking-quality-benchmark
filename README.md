@@ -2,6 +2,8 @@
 
 Correlate WakaTime coding activity with code quality metrics.
 
+**Write-up:** a quality benchmark in an open agentic coding harness — [An Open Agentic Coding Harness](https://qte77.github.io/open-agentic-coding-harness/).
+
 ## What
 
 Consumes WakaTime API data from `../waka-data/`, runs quality tools against
