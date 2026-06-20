@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "date": "2026-03-09",
+      "grand_total_seconds": 14400.0,
+      "projects": [
+        {"name": "alpha", "total_seconds": 9000.0},
+        {"name": "beta", "total_seconds": 5400.0}
+      ]
+    },
+    {
+      "date": "2026-03-10",
+      "grand_total_seconds": 7200.0,
+      "projects": [
+        {"name": "alpha", "total_seconds": 7200.0}
+      ]
+    }
+  ]
+}

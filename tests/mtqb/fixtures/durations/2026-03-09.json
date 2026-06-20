@@ -1,0 +1,7 @@
+{
+  "data": [
+    {"project": "alpha", "duration": 3600.0, "time": 1741478400.0},
+    {"project": "alpha", "duration": 1800.0, "time": 1741482000.0},
+    {"project": "beta",  "duration": 900.0,  "time": 1741485600.0}
+  ]
+}
