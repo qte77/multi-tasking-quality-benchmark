@@ -56,3 +56,6 @@ jscpd-report.json
 
 # External data store — not owned by this repo; fetch via make waka-poll
 waka-data/
+
+# Local Claude Code overrides — never commit
+.claude/settings.local.json
