@@ -1,0 +1,58 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# environment
+.venv/
+*.env
+unset_env.sh
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Testing
+.pytest_cache/
+.coverage/
+.coverage
+
+# Logs
+*.log
+logs/
+
+# Eval results (gitignored output)
+results/
+
+# Traces
+scalene-profiles
+profile.html
+profile.json
+.opik_install_reported
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE specific files (adjust as needed)
+# .vscode/
+# .idea/
+
+# mkdocs
+reference/
+site/
+
+# sanity
+.ruff_cache/
+.mypy_cache/
+.complexipy_cache
+
+# hypothesis
+.hypothesis/
+
+# jscpd
+.jscpd/
+jscpd-report.json
+
+# External data store — not owned by this repo; fetch via make waka-poll
+waka-data/
