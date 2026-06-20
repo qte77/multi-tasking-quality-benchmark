@@ -88,4 +88,4 @@ make waka-correlate   # join activity + quality snapshots → results/
 
 ## License
 
-MIT
+Apache-2.0

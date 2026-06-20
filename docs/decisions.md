@@ -72,12 +72,13 @@ Real-data validation is deferred to `make waka-poll` + manual verification.
 
 ---
 
-## ADR-5: MIT license
+## ADR-5: Apache-2.0 license
 
-**Context:** This repo is a personal research tool under the qte77 estate.
+**Context:** This repo is part of the qte77 estate. The estate standard
+(coding-agent-eval, repo-baseline) uses Apache-2.0.
 
-**Decision:** MIT license, copyright 2026.
+**Decision:** Apache-2.0 license, matching the estate standard.
 
-**Why:** Permissive license consistent with the exploratory, open nature of
-the research. Sibling repo coding-agent-eval uses Apache-2.0; this repo's
-simpler scope warrants the lighter MIT.
+**Why:** Consistency across the estate simplifies contribution and reuse.
+Apache-2.0 is permissive and provides explicit patent grant; it is the
+established baseline for all qte77 code repos.
