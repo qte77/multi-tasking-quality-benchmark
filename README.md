@@ -11,9 +11,9 @@ or human vs agent contributions correlate with better or worse code quality.
 
 ## Data Source
 
-`../waka-data/` — a shared local data store written by the WakaTime poll command.
-
-Already contains 14 days of real data:
+`../waka-data/` — an external data store, **not present in this checkout**.
+Fetch it with `make waka-poll`. Tests run against committed fixtures under
+`tests/mtqb/fixtures/`.
 
 ```
 waka-data/
@@ -23,7 +23,7 @@ waka-data/
   durations/
     2026-03-09.json       # daily duration segments
     ...
-    2026-03-22.json
+    YYYY-MM-DD.json
 ```
 
 This repo reads from that directory. It does not own or manage it.
@@ -66,11 +66,17 @@ make waka-correlate   # join activity + quality snapshots → results/
 
 ## Status
 
-**Phase 0** — documentation and data collection complete.
+**Phase 0** — scaffold complete; loader logic pending.
 
-- [x] WakaTime data collection (`waka-data/`, 14 days of real data)
-- [x] Foundational documentation
-- [ ] Pydantic models and data loader
+- [x] Foundational documentation (README, UserStory, architecture, TODO, decisions)
+- [x] Repo scaffold to estate standard (pyproject.toml, Makefile, .editorconfig,
+      ruff/pyright/complexipy/pytest/scriv, .claude/rules/, AGENTS.md)
+- [x] Pydantic models defined (`src/mtqb/models.py`: SummaryProject, DailySummary,
+      Project, AllTime, DurationSegment)
+- [x] WakaLoader interface stubbed (`src/mtqb/loader.py`: typed stubs, NotImplementedError)
+- [x] Loader spec tests added (`tests/mtqb/test_loader.py`: 7 xfail TDD-red + 1 sanity)
+- [ ] WakaTime data collection (`waka-data/` — external, fetch via `make waka-poll`)
+- [ ] WakaLoader logic implemented (turn RED tests GREEN)
 - [ ] Quality collector
 - [ ] Correlator and reporting
 
