@@ -1,0 +1,1 @@
+../../../../.claude/scripts/read-once/compact.sh
