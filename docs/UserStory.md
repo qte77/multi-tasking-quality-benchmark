@@ -67,6 +67,37 @@ between coding effort and code quality.
 - Python 3.13+
 - `waka-data/` directory is the canonical data store (shared across tools)
 
+## Research Framing
+
+### Hypothesis
+
+Longer or more focused coding sessions, and human-authored contributions (as
+opposed to agent-generated code), correlate with measurable improvements in
+code quality metrics (fewer lint violations, fewer type errors, higher test
+pass rates, lower complexity).
+
+### Interpretation
+
+- **Positive correlation** (more time / human contribution → better quality):
+  suggests sustained focus and human judgment improve code quality; informs
+  decisions to invest in longer uninterrupted sessions and limit agent autonomy
+  for quality-critical paths.
+- **Negative correlation** (more time / human contribution → worse quality):
+  may indicate fatigue effects or that agent-assisted sessions introduce
+  discipline (consistent linting, typing); prompts re-evaluation of
+  human-only workflows.
+- **Null result**: session length or authorship type alone does not predict
+  quality; directs focus to other factors (spec quality, review practices).
+
+### Research Success Criteria
+
+1. The correlation dataset covers at least 14 session-days with both activity
+   data and quality snapshots, enabling meaningful pattern detection.
+2. Results distinguish human vs agent sessions via `.wakatime-project` tags,
+   not just total time.
+3. The analysis produces a reproducible pipeline (committed fixtures, versioned
+   code) so findings can be independently validated or extended.
+
 ## Out of Scope
 
 - Wakapi self-hosted server setup
