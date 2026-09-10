@@ -14,7 +14,7 @@ version: 1.2.0
 - [x] Repo created
 - [x] Foundational docs: README, UserStory, architecture, TODO, decisions
 - [x] Repo scaffold to estate standard: `pyproject.toml`, `Makefile`,
-      `Makefile.python`, `.editorconfig`, `.gitignore`, `LICENSE` (MIT),
+      `Makefile.python`, `.editorconfig`, `.gitignore`, `LICENSE` (Apache-2.0),
       `SECURITY.md`, `AGENTS.md`, `.claude/rules/`, `.claude/skills/`
 - [x] Pydantic models (`src/mtqb/models.py`): `SummaryProject`, `DailySummary`,
       `Project`, `AllTime`, `DurationSegment`; all `strict=True, frozen=True`
@@ -51,7 +51,7 @@ version: 1.2.0
 - [ ] `make waka-poll` Makefile target
 - [ ] Session tagger (`src/mtqb/session_tagger.py`) — `.wakatime-project`
       write/restore context manager, tag format `S01/cc/phase1`
-- [ ] Integration with `coding-agent-eval` — tag agent runs, pull quality
+- [ ] Integration with `coding-harness-eval` — tag agent runs, pull quality
       snapshots, compare human vs agent sessions
 
 ## Deferred
