@@ -75,7 +75,7 @@ Real-data validation is deferred to `make waka-poll` + manual verification.
 ## ADR-5: Apache-2.0 license
 
 **Context:** This repo is part of the qte77 estate. The estate standard
-(coding-agent-eval, repo-baseline) uses Apache-2.0.
+(coding-harness-eval, repo-baseline) uses Apache-2.0.
 
 **Decision:** Apache-2.0 license, matching the estate standard.
 
