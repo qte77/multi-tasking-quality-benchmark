@@ -27,12 +27,14 @@
 ## How
 
 ```bash
+make waka-load        # load ../waka-data/ into typed models (WAKA_DATA_DIR to override)
 make waka-poll        # fetch latest WakaTime data → ../waka-data/
 make waka-correlate   # join activity + quality snapshots → results/
 ```
 
-Both targets are Phase-0 placeholders until the client and correlator land
-(see [docs/TODO.md](docs/TODO.md)). Pipeline and component details:
+`waka-load` is implemented; `waka-poll` and `waka-correlate` are Phase-0
+placeholders until the client and correlator land (see
+[docs/TODO.md](docs/TODO.md)). Pipeline and component details:
 [docs/architecture.md](docs/architecture.md).
 
 ## Why

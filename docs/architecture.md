@@ -3,14 +3,16 @@ title: Architecture - multi-tasking-quality-benchmark
 description: System design and component breakdown for the WakaTime quality correlation pipeline
 category: technical
 created: 2026-03-22
-updated: 2026-03-22
-version: 1.0.0
+updated: 2026-09-10
+version: 1.1.0
 ---
 
 # Architecture: multi-tasking-quality-benchmark
 
-> **Status: Planned Design — no code yet.** This document describes the
-> intended architecture. Nothing in `src/` is implemented beyond stubs.
+> **Status:** Pydantic models (`src/mtqb/models.py`) and the data loader
+> (`src/mtqb/loader.py`) are implemented. The client, quality collector,
+> correlator, and session tagger below are still planned — see
+> [docs/TODO.md](docs/TODO.md) for current status.
 
 ## Overview
 
@@ -93,10 +95,11 @@ Free tier retains 14 days. Outside that window, API returns `{"data": []}`.
 
 Reads existing `waka-data/` JSON files into Pydantic models. No API calls.
 
-- Validates all files exist before loading
+- Each `load_*` method reads its file lazily and raises `FileNotFoundError`
+  if that specific file is missing (no bulk pre-check of the whole directory)
 - Handles variable segment counts per day (0 to 96 observed)
-- `daily_average` from `all_time.json` is in seconds — loader converts to
-  human-readable form where needed
+- `daily_average` from `all_time.json` is in seconds — returned as-is;
+  callers convert to a human-readable form if needed
 
 ### Session Tagger (`src/mtqb/session_tagger.py`)
 
@@ -112,7 +115,7 @@ enabling human vs agent distinction in the data.
 Runs quality tools against a target repo and returns a `QualitySnapshot`.
 
 | Tool | Metric captured |
-|------|----------------|
+| ------ | ---------------- |
 | `ruff check` | `lint_violations` (count) |
 | `pyright` | `type_errors` (count) |
 | `pytest` | `test_pass_rate` (0.0–1.0) |
