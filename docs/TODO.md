@@ -31,6 +31,9 @@ version: 1.2.0
 - [x] `make waka-load` Makefile target (`Makefile.python`): instantiates
       `WakaLoader` against `WAKA_DATA_DIR` (default `../waka-data`) and
       prints a one-line summary of counts loaded
+- [x] CI pipeline (`.github/workflows/{pytest,ruff,pyright,complexipy}.yaml`):
+      runs on push and PR-close against `main`, gating on `make test_all`,
+      `make ruff`, `make type_check`, `make complexity` respectively
 
 ## Phase 0 Checklist
 
@@ -60,4 +63,3 @@ version: 1.2.0
 - [ ] WakaTime paid tier backfill automation (full history beyond 14 days)
 - [ ] Statistical significance testing (exploratory only for now)
 - [ ] Visualization dashboards or interactive charts
-- [ ] CI/CD pipeline
