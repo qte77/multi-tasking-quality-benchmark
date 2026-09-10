@@ -49,6 +49,7 @@ measurable. Hypotheses and framing: [docs/UserStory.md](docs/UserStory.md).
 
 ## Refs
 
+- [CONTRIBUTING.md](CONTRIBUTING.md) — workflow, commands, releasing
 - [docs/architecture.md](docs/architecture.md) — data flow, components, API
   notes
 - [docs/UserStory.md](docs/UserStory.md) — problem statement and hypotheses
