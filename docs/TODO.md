@@ -3,8 +3,8 @@ title: TODO - multi-tasking-quality-benchmark
 description: Task tracker for the WakaTime quality correlation pipeline
 category: implementation
 created: 2026-03-22
-updated: 2026-06-20
-version: 1.1.0
+updated: 2026-09-10
+version: 1.2.0
 ---
 
 # TODO: multi-tasking-quality-benchmark
@@ -23,18 +23,19 @@ version: 1.1.0
 - [x] Loader spec tests (`tests/mtqb/test_loader.py`): 7 `xfail(strict=True)`
       TDD-red tests + 1 fixture sanity test; committed fixtures under
       `tests/mtqb/fixtures/`
+- [x] `WakaLoader` logic implemented (`src/mtqb/loader.py`): `load_summaries`,
+      `load_projects`, `load_all_time`, `load_durations(date)` — unwraps
+      `{"data": [...]}` envelopes, validates with Pydantic, raises
+      `FileNotFoundError` on missing files; all 7 spec tests turned GREEN
+      (xfail markers removed)
+- [x] `make waka-load` Makefile target (`Makefile.python`): instantiates
+      `WakaLoader` against `WAKA_DATA_DIR` (default `../waka-data`) and
+      prints a one-line summary of counts loaded
 
 ## Phase 0 Checklist
 
 - [ ] `waka-data/` external data store present (NOT in-repo; fetch via `make waka-poll`)
-- [ ] Loader logic implemented (currently a typed stub raising `NotImplementedError`)
-
-## Next
-
-- [ ] Implement `WakaLoader` logic (`src/mtqb/loader.py`) — unwrap
-      `{"data": [...]}` envelopes, validate with Pydantic, raise
-      `FileNotFoundError` on missing date files; turn xfail tests GREEN
-- [ ] `make waka-load` Makefile target (run loader, print summary)
+- [x] Loader logic implemented (`src/mtqb/loader.py`, no longer a stub)
 
 ## Backlog
 
