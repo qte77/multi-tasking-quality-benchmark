@@ -9,3 +9,6 @@
   paths.
 - All 7 `xfail(strict=True)` TDD-red tests in `tests/mtqb/test_loader.py`
   turned GREEN; xfail markers removed now that behavior is real.
+- `make waka-load` Makefile target (`Makefile.python`): instantiates
+  `WakaLoader` against the `WAKA_DATA_DIR` env var (default `../waka-data`)
+  and prints a one-line summary of counts loaded.
