@@ -3,8 +3,8 @@ title: TODO - multi-tasking-quality-benchmark
 description: Task tracker for the WakaTime quality correlation pipeline
 category: implementation
 created: 2026-03-22
-updated: 2026-09-10
-version: 1.2.0
+updated: 2026-10-24
+version: 1.3.0
 ---
 
 # TODO: multi-tasking-quality-benchmark
@@ -34,6 +34,10 @@ version: 1.2.0
 - [x] CI pipeline (`.github/workflows/{pytest,ruff,pyright,complexipy}.yaml`):
       runs on push and PR-close against `main`, gating on `make test_all`,
       `make ruff`, `make type_check`, `make complexity` respectively
+- [x] Quality collector (`src/mtqb/quality_collector.py`) — ruff + pyright +
+      pytest + complexipy + jscpd → `QualitySnapshot` (model in
+      `src/mtqb/models.py`); missing tool / bad output → `None` field (#2)
+- [x] `make quality-snapshot REPO=path` Makefile target (#2)
 
 ## Phase 0 Checklist
 
@@ -42,9 +46,6 @@ version: 1.2.0
 
 ## Backlog
 
-- [ ] Quality collector (`src/mtqb/quality_collector.py`) — ruff + pyright +
-      pytest + complexipy + jscpd → `QualitySnapshot`
-- [ ] `make quality-snapshot REPO=path` Makefile target
 - [ ] Correlator (`src/mtqb/correlator.py`) — join activity + quality
       snapshots → `CorrelationRecord` list
 - [ ] `make waka-correlate` Makefile target

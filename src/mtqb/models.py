@@ -1,8 +1,10 @@
-"""Pydantic models for WakaTime API JSON shapes consumed by the loader.
+"""Pydantic models for WakaTime API JSON shapes and quality snapshots.
 
 All models use strict + frozen config: fields are validated on construction
 and instances are immutable after creation.
 """
+
+from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -62,3 +64,21 @@ class DurationSegment(BaseModel):
     project: str
     duration: float = Field(ge=0)
     time: float
+
+
+class QualitySnapshot(BaseModel):
+    """Code quality of a target repo at one point in time.
+
+    A metric is None when its tool is missing or its output can't be parsed;
+    partial snapshots are valid (see docs/decisions.md ADR-3).
+    """
+
+    model_config = ConfigDict(strict=True, frozen=True)
+
+    timestamp: datetime
+    repo_path: str
+    test_pass_rate: float | None = Field(ge=0, le=1)
+    lint_violations: int | None = Field(ge=0)
+    type_errors: int | None = Field(ge=0)
+    complexity_score: float | None = Field(ge=0)
+    duplication_pct: float | None = Field(ge=0, le=100)
