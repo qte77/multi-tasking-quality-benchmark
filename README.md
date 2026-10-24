@@ -28,12 +28,14 @@
 
 ```bash
 make waka-load        # load ../waka-data/ into typed models (WAKA_DATA_DIR to override)
+make quality-snapshot REPO=path  # print a QualitySnapshot (JSON) for a target repo
 make waka-poll        # fetch latest WakaTime data → ../waka-data/
 make waka-correlate   # join activity + quality snapshots → results/
 ```
 
-`waka-load` is implemented; `waka-poll` and `waka-correlate` are Phase-0
-placeholders until the client and correlator land (see
+`waka-load` and `quality-snapshot` are implemented; `waka-poll` and
+`waka-correlate` are Phase-0 placeholders until the client and correlator
+land (see
 [docs/TODO.md](docs/TODO.md)). Pipeline and component details:
 [docs/architecture.md](docs/architecture.md).
 

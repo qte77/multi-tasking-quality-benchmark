@@ -3,15 +3,16 @@ title: Architecture - multi-tasking-quality-benchmark
 description: System design and component breakdown for the WakaTime quality correlation pipeline
 category: technical
 created: 2026-03-22
-updated: 2026-09-10
-version: 1.1.0
+updated: 2026-10-24
+version: 1.2.0
 ---
 
 # Architecture: multi-tasking-quality-benchmark
 
-> **Status:** Pydantic models (`src/mtqb/models.py`) and the data loader
-> (`src/mtqb/loader.py`) are implemented. The client, quality collector,
-> correlator, and session tagger below are still planned — see
+> **Status:** Pydantic models (`src/mtqb/models.py`), the data loader
+> (`src/mtqb/loader.py`) and the quality collector
+> (`src/mtqb/quality_collector.py`) are implemented. The client, correlator,
+> and session tagger below are still planned — see
 > [docs/TODO.md](docs/TODO.md) for current status.
 
 ## Overview
@@ -122,8 +123,16 @@ Runs quality tools against a target repo and returns a `QualitySnapshot`.
 | `complexipy` | `complexity_score` (aggregate) |
 | `jscpd` | `duplication_pct` (0.0–100.0) |
 
-Tools are invoked via `subprocess.run()`. Missing tools produce `None` fields,
-not errors, so partial snapshots are valid.
+Tools are looked up on `PATH` and invoked via `subprocess.run()` with the
+target repo as working directory (`make quality-snapshot REPO=path` runs them
+from this repo's venv; jscpd comes from npm). A missing tool, a timeout, or
+unparseable output produces a `None` field, not an error, so partial snapshots
+are valid. `complexity_score` is the sum of per-function cognitive complexity
+from complexipy's JSON report; `test_pass_rate` is
+`passed / (passed + failed + errors)` (skipped tests excluded, `None` when no
+tests ran). The jscpd parser reads `statistics.total.percentage` from
+`jscpd-report.json`; it is covered by a fixture test but has not yet been run
+against a live jscpd install.
 
 ### Correlator (`src/mtqb/correlator.py`)
 
@@ -163,21 +172,20 @@ class DurationSegment(BaseModel):
     project: str
     duration: float               # ge=0
     time: float
+
+class QualitySnapshot(BaseModel):
+    timestamp: datetime
+    repo_path: str
+    test_pass_rate: float | None      # 0.0–1.0
+    lint_violations: int | None       # ge=0
+    type_errors: int | None           # ge=0
+    complexity_score: float | None    # ge=0
+    duplication_pct: float | None     # 0.0–100.0
 ```
 
 ### Planned (future modules)
 
 ```python
-# src/mtqb/quality_collector.py
-class QualitySnapshot(BaseModel):
-    timestamp: datetime
-    repo_path: str
-    test_pass_rate: float | None      # 0.0–1.0
-    lint_violations: int | None
-    type_errors: int | None
-    complexity_score: float | None
-    duplication_pct: float | None     # 0.0–100.0
-
 # src/mtqb/correlator.py
 class CorrelationRecord(BaseModel):
     date: str
@@ -199,15 +207,16 @@ multi-tasking-quality-benchmark/
     mtqb/
       __init__.py
       models.py            # Pydantic models (implemented)
-      loader.py            # waka-data/ reader → Pydantic models (stub)
+      loader.py            # waka-data/ reader → Pydantic models (implemented)
       client.py            # WakaTime API client (planned)
       session_tagger.py    # .wakatime-project write/restore (planned)
-      quality_collector.py # ruff + pyright + pytest + complexipy + jscpd (planned)
+      quality_collector.py # ruff + pyright + pytest + complexipy + jscpd (implemented)
       correlator.py        # join + report writer (planned)
   tests/
     mtqb/
       fixtures/            # committed JSON fixtures for loader tests
-      test_loader.py       # xfail TDD-red loader spec tests
+      test_loader.py       # loader behavior tests
+      test_quality_collector.py # collector tests (fake tool runner)
   results/
     correlation.md         # generated report (gitignored)
     data.csv               # generated data (gitignored)

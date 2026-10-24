@@ -2,7 +2,7 @@
 # Auto-included by main Makefile when .scaffold contains 'python'.
 # Run `make help` for available recipes.
 
-.PHONY: ruff complexity duplication lint_hardcoded_paths test_all test_quick test_coverage type_check validate validate_quick quick_validate docs_serve docs_build waka-load
+.PHONY: ruff complexity duplication lint_hardcoded_paths test_all test_quick test_coverage type_check validate validate_quick quick_validate docs_serve docs_build waka-load quality-snapshot
 
 WAKA_DATA_DIR ?= ../waka-data
 
@@ -73,6 +73,13 @@ quick_validate:  ## Fast development cycle validation
 
 waka-load:  ## Load waka-data/ JSON files and print a one-line summary (set WAKA_DATA_DIR to override, default: ../waka-data)
 	uv run python -c "from pathlib import Path; from mtqb.loader import WakaLoader; loader = WakaLoader(Path('$(WAKA_DATA_DIR)')); summaries = loader.load_summaries(); projects = loader.load_projects(); all_time = loader.load_all_time(); print(f'Loaded {len(summaries)} summaries, {len(projects)} projects, total_seconds={all_time.total_seconds}')"
+
+quality-snapshot:  ## Print a QualitySnapshot (JSON) for a repo. Usage: make quality-snapshot REPO=path
+	if [ -z "$(REPO)" ]; then
+		echo "ERROR: REPO is required. Usage: make quality-snapshot REPO=path"
+		exit 1
+	fi
+	uv run python -m mtqb.quality_collector "$(REPO)"
 
 # MARK: python docs
 
