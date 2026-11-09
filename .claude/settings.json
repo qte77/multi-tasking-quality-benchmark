@@ -33,12 +33,12 @@
     "allow": [
       "AskUserQuestion",
       "Bash(date:*)",
-      "Bash(git:add:*)",
-      "Bash(git:diff:*)",
-      "Bash(git:log:*)",
-      "Bash(git:status:*)",
-      "Bash(git:log:--grep:*)",
-      "Bash(git:rev-list:*)",
+      "Bash(git add:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git log --grep:*)",
+      "Bash(git rev-list:*)",
       "Bash(jq:*)",
       "Bash(make:*)",
       "Bash(tree:*)",
@@ -51,18 +51,12 @@
       "Read(.claude/skills/)",
       "Read(.claude/rules/)",
       "SlashCommand",
-      "Skill"
+      "Skill",
+      "Bash(git commit:*)"
     ],
     "deny": [
       "Bash(awk:*)",
-      "Bash(cat:*)",
-      "Bash(find:*)",
-      "Bash(git:push:*)",
-      "Bash(grep:*)",
-      "Bash(head:*)",
-      "Bash(ls:*)",
       "Bash(source:*)",
-      "Bash(tail:*)",
       "Bash(touch:*)",
       "Bash(curl:*)",
       "Bash(wget:*)",
@@ -71,7 +65,6 @@
     ],
     "ask": [
       "Bash(git clean:*)",
-      "Bash(git:commit:*)",
       "Bash(git reset:*)",
       "Bash(mv:*)",
       "Bash(mkdir:*)",
@@ -80,7 +73,8 @@
       "Edit(CLAUDE.md)",
       "Edit(Makefile)",
       "Edit(pyproject.toml)",
-      "Edit(README.md)"
+      "Edit(README.md)",
+      "Bash(git push:*)"
     ]
   },
   "attribution": {
